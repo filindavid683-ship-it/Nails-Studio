@@ -262,6 +262,13 @@
             padding: 8rem 2rem;
         }
 
+        #works,
+        #about,
+        #services,
+        #contacts {
+            scroll-margin-top: 100px;
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
@@ -290,9 +297,9 @@
         .carousel-track {
             display: flex;
             gap: 18px;
-            transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
             padding: 1rem 0.25rem 1.25rem;
             touch-action: pan-y;
+            will-change: transform;
         }
 
         .carousel-slide {
@@ -502,18 +509,19 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .service-card {
-            padding: 3rem;
+            padding: clamp(1.5rem, 4vw, 3rem);
             background: var(--white);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            border-radius: 16px;
         }
 
         .service-card::before {
@@ -563,69 +571,66 @@
             font-weight: 500;
         }
 
-.reviews {
-            background: var(--cream);
-            padding: 4rem 2rem;
-        }
-        
         .reviews-grid {
-            width: 100%;
-            margin: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
-            padding: 0 1rem;
-        }
-        
-        .review-card {
-            border-radius: 14px;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.07);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .review-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-        }
-        
-        .review-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        .reviews-grid {
-            max-width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            padding: 0 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+        .reviews {
+            background: var(--cream);
+            padding: 6rem 2rem;
         }
 
         .review-card {
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
             border-radius: 16px;
-            background: rgba(255,255,255,0.7);
-            box-shadow: 0 10px 28px rgba(83, 65, 51, 0.08);
+            background: var(--white);
+            border: 1px solid rgba(212, 196, 181, 0.45);
+            box-shadow: 0 10px 28px rgba(83, 65, 51, 0.1);
             transition: transform 0.35s ease, box-shadow 0.35s ease;
             cursor: pointer;
+            min-height: 360px;
+            will-change: transform;
+        }
+
+        .review-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.42) 45%, transparent 100%);
+            transform: translateX(-130%);
+            transition: transform 0.7s ease;
+            pointer-events: none;
         }
 
         .review-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             box-shadow: 0 16px 36px rgba(83, 65, 51, 0.14);
+        }
+
+        .review-card:hover::after {
+            transform: translateX(130%);
+        }
+
+        .review-card:focus-visible {
+            outline: 2px solid var(--accent-red);
+            outline-offset: 3px;
         }
 
         .review-card img {
             width: 100%;
-            aspect-ratio: 0.9 / 1;
+            height: auto;
             display: block;
-            object-fit: cover;
+            background: #fff;
+            pointer-events: none;
         }
 
         .review-lightbox {
@@ -725,6 +730,8 @@
 
         .contact-value {
             font-size: 1.2rem;
+            line-height: 1.55;
+            overflow-wrap: anywhere;
         }
 
         .contact-value a {
@@ -852,8 +859,8 @@
 
         @media (max-width: 1024px) {
             .carousel-slide {
-                flex: 0 0 210px;
-                height: 280px;
+                flex: 0 0 190px;
+                height: 260px;
             }
 
             .about {
@@ -887,7 +894,15 @@
 
         @media (max-width: 768px) {
             nav {
-                padding: 1rem 1.5rem;
+                padding: 0.75rem 0.9rem;
+            }
+
+            nav.scrolled {
+                padding: 0.7rem 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.05rem;
             }
 
             .nav-links {
@@ -895,7 +910,7 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 80%;
+                width: min(86vw, 330px);
                 height: 100%;
                 background: var(--cream);
                 flex-direction: column;
@@ -903,6 +918,8 @@
                 align-items: center;
                 gap: 2rem;
                 transition: right 0.4s ease;
+                box-shadow: -8px 0 24px rgba(0,0,0,0.08);
+                padding: 2rem 1.4rem;
             }
 
             .nav-links.active {
@@ -919,32 +936,196 @@
 
             .carousel-track {
                 gap: 14px;
-                padding: 0.75rem 0 1rem;
+                padding: 0.65rem 0 0.9rem;
             }
 
             .carousel-slide {
-                flex: 0 0 170px;
-                height: 230px;
+                flex: 0 0 min(62vw, 190px);
+                height: min(84vw, 250px);
+            }
+
+            .carousel-nav {
+                display: none;
             }
 
             .section {
-                padding: 5rem 1.5rem;
+                padding: 3.7rem 0.9rem;
+            }
+
+            .section-header {
+                margin-bottom: 2.3rem;
             }
 
             .about-content {
-                padding: 2rem 1.5rem;
+                padding: 1.9rem 1.15rem;
             }
 
             .features {
                 grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.68rem;
+                letter-spacing: 0.12em;
+            }
+
+            .section-title {
+                font-size: clamp(1.35rem, 6.8vw, 1.9rem);
             }
 
             .hero-title {
-                font-size: 2.5rem;
+                font-size: clamp(1.65rem, 8.9vw, 2.05rem);
+                margin-bottom: 0.85rem;
+            }
+
+            .hero {
+                min-height: 88vh;
+                padding: 5.1rem 0.9rem 2.3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.62rem;
+                letter-spacing: 0.11em;
+            }
+
+            .hero-desc {
+                font-size: 0.86rem;
+                line-height: 1.5;
+                margin-bottom: 1.45rem;
+                max-width: 360px;
+            }
+
+            .btn,
+            .booking-btn,
+            .form-btn {
+                width: 100%;
+                text-align: center;
+                letter-spacing: 0.06em;
+                padding: 0.72rem 0.95rem;
+                font-size: 0.72rem;
+            }
+
+            .services-grid {
+                gap: 1rem;
+            }
+
+            .service-card {
+                padding: 1.2rem 1rem;
+            }
+
+            .service-number {
+                font-size: 1.8rem;
+            }
+
+            .service-title {
+                font-size: 1.05rem;
+                margin-bottom: 0.65rem;
+            }
+
+            .service-desc {
+                font-size: 0.82rem;
+                line-height: 1.55;
+                margin-bottom: 0.9rem;
+            }
+
+            .service-price {
+                font-size: 0.95rem;
+            }
+
+            .about {
+                border-radius: 20px;
+            }
+
+            .about-image {
+                min-height: 300px;
+            }
+
+            .about-content .section-subtitle,
+            .about-content .section-title {
+                text-align: center;
             }
 
             .reviews-grid {
                 grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .reviews {
+                padding: 3.6rem 0.9rem;
+            }
+
+            .review-card {
+                min-height: 0;
+            }
+
+            .review-lightbox {
+                padding: 1rem;
+            }
+
+            .review-lightbox-inner {
+                width: 100%;
+                border-radius: 16px;
+            }
+
+            .review-lightbox-close {
+                top: 8px;
+                right: 8px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .contacts {
+                padding: 3.7rem 0.9rem;
+            }
+
+            .contacts-info h2 {
+                font-size: 1.65rem;
+            }
+
+            .contacts-form h3 {
+                font-size: 1.25rem;
+                margin-bottom: 1.1rem;
+            }
+
+            .contact-item {
+                margin-bottom: 1.35rem;
+            }
+
+            .contact-value {
+                font-size: 0.92rem;
+            }
+
+            footer {
+                padding: 1.8rem 0.9rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about {
+                border-radius: 14px;
+            }
+
+            .carousel-slide {
+                flex: 0 0 56vw;
+                height: 72vw;
+            }
+
+            .review-card {
+                border-radius: 12px;
+            }
+
+            .section {
+                padding: 3.2rem 0.8rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1.45rem, 8.2vw, 1.75rem);
+            }
+
+            .hero-desc {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -989,34 +1170,34 @@
         <div class="carousel">
             <div class="carousel-track">
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/k2gRWDP7/06.jpg" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-01.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/3Vz2HyH/90.jpg" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-02.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/dsFMSJgh/07.jpg" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-03.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/bjGbY7K3/80.jpg" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-04.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/0yT7Czq4/09.jpg" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-05.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/W4VH8Lw5/21.png" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-06.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/mFBKZrzL/22.png" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-07.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/FkLQbmvb/23.png" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-08.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/WvqM0tB6/24.png" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-09.webp" alt="Маникюр" class="slide-image">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/N2JbTzJM/25.png" alt="Маникюр" class="slide-image">
+                    <img src="assets/images/works-10.webp" alt="Маникюр" class="slide-image">
                 </div>
             </div>
             <div class="carousel-nav">
@@ -1028,7 +1209,7 @@
 
     <section class="about" id="about">
         <div class="about-image">
-            <img src="https://i.ibb.co/MD2zGJzM/34.png" alt="Фото студии">
+            <img src="assets/images/studio.webp" alt="Фото студии">
         </div>
         <div class="about-content">
             <p class="section-subtitle">О студии</p>
@@ -1036,17 +1217,17 @@
             <p class="about-text">Добро пожаловать в нашу студию маникюра и педикюра — пространство красоты и уюта, где каждая деталь создана для вашего комфорта. Мы предлагаем широкий спектр услуг: от классического маникюра до сложного дизайна и SPA-ухода.</p>
             <p class="about-text">Наши мастера — профессионалы с многолетним опытом, которые постоянно совершенствуют свои навыки и следят за последними трендами индустрии красоты.</p>
             <div class="features">
-                <div class="feature-item" style="--feature-bg: url('https://i.ibb.co/WvzRmQr1/31.png');">
+                <div class="feature-item" style="--feature-bg: url('assets/images/feature-01.webp');">
                     <div class="feature-icon">✦</div>
                     <h3 class="feature-title">Премиум материалы</h3>
                     <p class="feature-desc">Только качественные гель-лаки</p>
                 </div>
-                <div class="feature-item" style="--feature-bg: url('https://i.ibb.co/LDfggpYd/32.png');">
+                <div class="feature-item" style="--feature-bg: url('assets/images/feature-02.webp');">
                     <div class="feature-icon">♥</div>
                     <h3 class="feature-title">Индивидуальный подход</h3>
                     <p class="feature-desc">Персональные консультации</p>
                 </div>
-                <div class="feature-item" style="--feature-bg: url('https://i.ibb.co/7txCcjLD/33.png');">
+                <div class="feature-item" style="--feature-bg: url('assets/images/feature-03.webp');">
                     <div class="feature-icon">★</div>
                     <h3 class="feature-title">Гарантия качества</h3>
                     <p class="feature-desc">Долговечное покрытие</p>
@@ -1092,10 +1273,22 @@
                 <p class="service-price">от 1 800 ₽</p>
             </div>
             <div class="service-card">
-                <div class="service-number">?</div>
+                <div class="service-number">06</div>
                 <h3 class="service-title">Наращивание</h3>
-                <p class="service-desc">Наращивание ��огтей гелем или акрилом для создания идеальной формы и длины.</p>
+                <p class="service-desc">Наращивание ногтей на верхние формы или гелем с аккуратной архитектурой и ноской до 4 недель.</p>
                 <p class="service-price">от 3 000 ₽</p>
+            </div>
+            <div class="service-card">
+                <div class="service-number">07</div>
+                <h3 class="service-title">Снятие + маникюр</h3>
+                <p class="service-desc">Безопасное снятие старого покрытия с последующим маникюром и уходом за кутикулой.</p>
+                <p class="service-price">от 1 200 ₽</p>
+            </div>
+            <div class="service-card">
+                <div class="service-number">08</div>
+                <h3 class="service-title">Экспресс-дизайн</h3>
+                <p class="service-desc">Быстрый дизайн на 2-4 ногтя: фольга, стемпинг, втирка и минималистичные акценты.</p>
+                <p class="service-price">от 700 ₽</p>
             </div>
         </div>
     </section>
@@ -1106,16 +1299,21 @@
             <h2 class="section-title">Отзывы клиентов</h2>
         </div>
         <div class="reviews-grid">
-            <div class="review-card"><img src="https://i.ibb.co/TBBV9tqY/42.png" alt="Отзыв клиента 1"></div>
-            <div class="review-card"><img src="https://s10.iimage.su/s/25/gWYZsqRxz70S8piXQpr15KIk7oiX6p0XoRYU3izOw.jpg" alt="Отзыв клиента 2"></div>
-            <div class="review-card"><img src="https://s10.iimage.su/s/25/gexImkdxkJbdNYWIzu2TZPBpQ21hDU45LgmRkjgCe.jpg" alt="Отзыв клиента 3"></div>
-            <div class="review-card"><img src="https://s10.iimage.su/s/25/gwRptyqxsjRLz2PLSlaIL0QGfZiiYpTDizsqAqskF.jpg" alt="Отзыв клиента 4"></div>
-            <div class="review-card"><img src="https://s10.iimage.su/s/25/gAR3KDjxYzc4siYblZjEZY4IpDSzAZuu9ifK7UdkU.jpg" alt="Отзыв клиента 5"></div>
-            <div class="review-card"><img src="https://s10.iimage.su/s/25/geAVf8oxoBtbOVYst56Uiw2gbT7kugEaYROKcSbcu.png" alt="Отзыв клиента 6"></div>
+            <div class="review-card"><img src="assets/images/review-01.webp" alt="Отзыв клиента 1"></div>
+            <div class="review-card"><img src="assets/images/review-02.webp" alt="Отзыв клиента 2"></div>
+            <div class="review-card"><img src="assets/images/review-04.webp" alt="Отзыв клиента 4"></div>
+            <div class="review-card"><img src="assets/images/review-06.webp" alt="Отзыв клиента 6"></div>
         </div>
     </section>
 
     
+
+    <div class="review-lightbox" id="review-lightbox" aria-hidden="true">
+        <div class="review-lightbox-inner" role="dialog" aria-modal="true" aria-label="Полный отзыв клиента">
+            <button class="review-lightbox-close" type="button" aria-label="Закрыть">&times;</button>
+            <img id="review-lightbox-image" src="" alt="">
+        </div>
+    </div>
 
     <section class="contacts" id="contacts">
         <div class="contacts-grid">
@@ -1186,130 +1384,183 @@
             });
         });
 
-        const carousel = document.querySelector('.carousel-track');
+        const carouselTrack = document.querySelector('.carousel-track');
         const carouselViewport = document.querySelector('.carousel');
         const prevBtn = document.querySelector('.carousel-btn.prev');
         const nextBtn = document.querySelector('.carousel-btn.next');
-        const slides = document.querySelectorAll('.carousel-slide');
-        let currentSlide = 0;
-        let autoScroll;
-        let touchStartX = 0;
-        let touchEndX = 0;
 
-        function updateCarousel() {
-            const slideWidth = slides[0].offsetWidth + 18;
-            const visibleSlides = window.innerWidth <= 768 ? 1 : Math.max(1, Math.floor(carouselViewport.offsetWidth / slideWidth));
-            const maxSlide = Math.max(0, slides.length - visibleSlides);
-
-            currentSlide = Math.min(Math.max(currentSlide, 0), maxSlide);
-            carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-        }
-
-        function getMaxSlide() {
-            const slideWidth = slides[0].offsetWidth + 18;
-            const visibleSlides = window.innerWidth <= 768 ? 1 : Math.max(1, Math.floor(carouselViewport.offsetWidth / slideWidth));
-
-            return Math.max(0, slides.length - visibleSlides);
-        }
-
-        function startAutoScroll() {
-            clearInterval(autoScroll);
-            autoScroll = setInterval(() => {
-                const maxSlide = getMaxSlide();
-
-                currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
-                updateCarousel();
-            }, 3800);
-        }
-
-        prevBtn.addEventListener('click', () => {
-            const maxSlide = getMaxSlide();
-            currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
-            updateCarousel();
-            startAutoScroll();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            const maxSlide = getMaxSlide();
-            currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
-            updateCarousel();
-            startAutoScroll();
-        });
-
-        carouselViewport.addEventListener('touchstart', (event) => {
-            touchStartX = event.changedTouches[0].clientX;
-        }, { passive: true });
-
-        carouselViewport.addEventListener('touchend', (event) => {
-            touchEndX = event.changedTouches[0].clientX;
-            const maxSlide = getMaxSlide();
-
-            if (touchStartX - touchEndX > 40) {
-                currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
-                updateCarousel();
-                startAutoScroll();
+        function setupInfiniteCarousel() {
+            if (!carouselTrack || !carouselViewport) {
+                return;
             }
 
-            if (touchEndX - touchStartX > 40) {
-                currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
-                updateCarousel();
-                startAutoScroll();
+            let baseCount = Number(carouselTrack.dataset.baseCount || 0);
+
+            if (!baseCount) {
+                const originalSlides = Array.from(carouselTrack.children);
+                baseCount = originalSlides.length;
+                carouselTrack.dataset.baseCount = String(baseCount);
+                originalSlides.forEach((slide) => {
+                    carouselTrack.appendChild(slide.cloneNode(true));
+                });
             }
-        }, { passive: true });
 
-        window.addEventListener('resize', updateCarousel);
+            const allSlides = Array.from(carouselTrack.children);
+            let loopOffset = 0;
+            let singleSetWidth = 0;
+            let isPaused = false;
+            let rafId = null;
+            let lastFrameTime = 0;
 
-        updateCarousel();
-        startAutoScroll();
+            const getGap = () => {
+                const styles = window.getComputedStyle(carouselTrack);
+                return parseFloat(styles.gap || styles.columnGap || '18') || 18;
+            };
+
+            const getSpeed = () => (window.innerWidth <= 768 ? 24 : 34);
+
+            const render = () => {
+                carouselTrack.style.transform = `translateX(-${loopOffset}px)`;
+            };
+
+            const recalcMetrics = () => {
+                const gap = getGap();
+                singleSetWidth = 0;
+
+                for (let i = 0; i < baseCount; i += 1) {
+                    singleSetWidth += allSlides[i].getBoundingClientRect().width;
+                    if (i < baseCount - 1) {
+                        singleSetWidth += gap;
+                    }
+                }
+
+                if (singleSetWidth > 0 && loopOffset >= singleSetWidth) {
+                    loopOffset %= singleSetWidth;
+                }
+
+                render();
+            };
+
+            const nudge = (delta) => {
+                if (!singleSetWidth) {
+                    return;
+                }
+                loopOffset = (loopOffset + delta + singleSetWidth) % singleSetWidth;
+                render();
+            };
+
+            const animate = (timestamp) => {
+                if (!lastFrameTime) {
+                    lastFrameTime = timestamp;
+                }
+
+                const deltaSeconds = (timestamp - lastFrameTime) / 1000;
+                lastFrameTime = timestamp;
+
+                if (!isPaused && singleSetWidth > 0) {
+                    loopOffset += getSpeed() * deltaSeconds;
+                    if (loopOffset >= singleSetWidth) {
+                        loopOffset -= singleSetWidth;
+                    }
+                    render();
+                }
+
+                rafId = window.requestAnimationFrame(animate);
+            };
+
+            prevBtn?.addEventListener('click', () => nudge(-220));
+            nextBtn?.addEventListener('click', () => nudge(220));
+
+            carouselViewport.addEventListener('mouseenter', () => {
+                isPaused = true;
+            });
+            carouselViewport.addEventListener('mouseleave', () => {
+                isPaused = false;
+            });
+            carouselViewport.addEventListener('touchstart', () => {
+                isPaused = true;
+            }, { passive: true });
+            carouselViewport.addEventListener('touchend', () => {
+                window.setTimeout(() => {
+                    isPaused = false;
+                }, 250);
+            }, { passive: true });
+
+            window.addEventListener('resize', recalcMetrics);
+            window.addEventListener('beforeunload', () => {
+                if (rafId) {
+                    window.cancelAnimationFrame(rafId);
+                }
+            });
+
+            recalcMetrics();
+            rafId = window.requestAnimationFrame(animate);
+        }
+
+        setupInfiniteCarousel();
 
         const form = document.querySelector('.contacts-form form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
             alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-            form.reset();
-        });
+                form.reset();
+            });
+        }
 
         const reviewLightbox = document.getElementById('review-lightbox');
         const reviewLightboxImage = document.getElementById('review-lightbox-image');
         const reviewLightboxClose = document.querySelector('.review-lightbox-close');
+        const reviewCards = document.querySelectorAll('.review-card');
 
-        function closeReviewLightbox() {
-            reviewLightbox.classList.remove('active');
-            reviewLightbox.setAttribute('aria-hidden', 'true');
-            reviewLightboxImage.src = '';
-        }
-
-        document.querySelectorAll('.review-card img').forEach((image) => {
-            image.addEventListener('mouseenter', () => {
+        if (reviewLightbox && reviewLightboxImage && reviewLightboxClose && reviewCards.length) {
+            const openReviewLightbox = (image) => {
                 reviewLightboxImage.src = image.src;
                 reviewLightboxImage.alt = image.alt;
                 reviewLightbox.classList.add('active');
                 reviewLightbox.setAttribute('aria-hidden', 'false');
-            });
-        });
+                document.body.style.overflow = 'hidden';
+            };
 
-        document.querySelectorAll('.review-card').forEach((card) => {
-            card.addEventListener('mouseleave', (event) => {
-                const relatedTarget = event.relatedTarget;
-                if (!reviewLightbox.contains(relatedTarget)) {
+            const closeReviewLightbox = () => {
+                reviewLightbox.classList.remove('active');
+                reviewLightbox.setAttribute('aria-hidden', 'true');
+                reviewLightboxImage.src = '';
+                document.body.style.overflow = '';
+            };
+
+            reviewCards.forEach((card) => {
+                const image = card.querySelector('img');
+                if (!image) {
+                    return;
+                }
+
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', image.alt);
+
+                card.addEventListener('click', () => openReviewLightbox(image));
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openReviewLightbox(image);
+                    }
+                });
+            });
+
+            reviewLightbox.addEventListener('click', (event) => {
+                if (event.target === reviewLightbox) {
                     closeReviewLightbox();
                 }
             });
-        });
+            reviewLightboxClose.addEventListener('click', closeReviewLightbox);
 
-        reviewLightbox.addEventListener('mouseleave', closeReviewLightbox);
-        reviewLightbox.addEventListener('click', (event) => {
-            if (event.target === reviewLightbox) {
-                closeReviewLightbox();
-            }
-        });
-        reviewLightboxClose.addEventListener('click', closeReviewLightbox);
-
-        window.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                closeReviewLightbox();
-            }
-        });
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && reviewLightbox.classList.contains('active')) {
+                    closeReviewLightbox();
+                }
+            });
+        }
 
         const observerOptions = {
             threshold: 0.1
