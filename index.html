@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nails Studio | Маникюр & Педикюр</title>
+    <title>НАСТОЯЩЕ | Маникюр & Педикюр</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -1052,7 +1052,9 @@
             }
 
             .logo {
-                font-size: 1.05rem;
+                font-size: 0.92rem;
+                letter-spacing: 0.08em;
+                padding: 0.36rem 0.7rem;
                 color: var(--charcoal);
                 border-color: rgba(212,196,181,0.85);
                 background: rgba(255,255,255,0.92);
@@ -1162,7 +1164,7 @@
 
             .hero-shell {
                 grid-template-columns: 1fr;
-                gap: 4.8rem;
+                gap: 1.4rem;
                 min-height: auto;
             }
 
@@ -1171,7 +1173,7 @@
             }
 
             .hero-media {
-                min-height: 320px;
+                display: none;
             }
 
             .hero-title {
@@ -1219,30 +1221,35 @@
             }
 
             .services-grid {
-                gap: 1rem;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 150px);
+                justify-content: center;
+                gap: 0.6rem;
             }
 
             .service-card {
-                padding: 1.2rem 1rem;
+                width: 150px;
+                padding: 1rem 0.7rem;
             }
 
             .service-number {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                margin-bottom: 0.45rem;
             }
 
             .service-title {
-                font-size: 1.05rem;
-                margin-bottom: 0.65rem;
+                font-size: 0.88rem;
+                margin-bottom: 0.45rem;
             }
 
             .service-desc {
-                font-size: 0.82rem;
-                line-height: 1.55;
-                margin-bottom: 0.9rem;
+                font-size: 0.72rem;
+                line-height: 1.45;
+                margin-bottom: 0.55rem;
             }
 
             .service-price {
-                font-size: 0.95rem;
+                font-size: 0.82rem;
             }
 
             .reviews-grid {
@@ -1309,26 +1316,35 @@
             }
 
             .features {
-                grid-template-columns: 1fr;
-                gap: 0.8rem;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.5rem;
                 margin-top: 1rem;
             }
 
             .feature-item {
                 min-height: 132px;
-                padding: 1.1rem 0.9rem;
+                padding: 0.85rem 0.45rem;
+            }
+
+            .feature-title {
+                font-size: 0.82rem;
+            }
+
+            .feature-desc {
+                font-size: 0.68rem;
             }
 
             .contacts-grid {
-                gap: 2.1rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.2rem;
             }
 
             .contacts-form {
-                order: 1;
+                order: 2;
             }
 
             .contacts-info {
-                order: 2;
+                order: 1;
             }
 
             .contacts-info h2 {
@@ -1427,11 +1443,11 @@
 </head>
 <body>
     <div class="loader">
-        <div class="loader-text">Nails Studio</div>
+        <div class="loader-text">НАСТОЯЩЕ</div>
     </div>
 
     <nav>
-        <div class="logo">NAILS</div>
+        <div class="logo">НАСТОЯЩЕ</div>
         <ul class="nav-links">
             <li><a href="#works">Работы</a></li>
             <li><a href="#about">О студии</a></li>
@@ -1449,7 +1465,7 @@
         <div class="hero-shell">
             <div class="hero-copy">
                 <p class="hero-subtitle">Студия маникюра и педикюра</p>
-                <h1 class="hero-title">Nails Studio</h1>
+                <h1 class="hero-title">НАСТОЯЩЕ</h1>
                 <p class="hero-desc">Точный маникюр, аккуратный педикюр и дизайнерские покрытия в спокойной эстетике салона. Работаем деликатно, стерильно и с фокусом на безупречный результат.</p>
                 <div class="hero-actions">
                     <a href="#contacts" class="hero-link">Записаться</a>
@@ -1526,11 +1542,11 @@
                 <div class="feature-item" style="--feature-bg: url('assets/images/feature-01.webp');">
                     <div class="feature-icon">&#10022;</div>
                     <h3 class="feature-title">Премиум материалы</h3>
-                    <p class="feature-desc">Только качественные гель-лаки</p>
+                    <p class="feature-desc">Только качественные </p>
                 </div>
                 <div class="feature-item" style="--feature-bg: url('assets/images/feature-02.webp');">
                     <div class="feature-icon">&#9829;</div>
-                    <h3 class="feature-title">Индивидуальный подход</h3>
+                    <h3 class="feature-title">Бережный подход</h3>
                     <p class="feature-desc">Персональные консультации</p>
                 </div>
                 <div class="feature-item" style="--feature-bg: url('assets/images/feature-03.webp');">
@@ -1667,7 +1683,7 @@
         <div class="social-links">
             <a href="https://instagram.com/@Nastoyashche_admin" target="_blank">Instagram</a>
         </div>
-        <p>В© 2026 Nails Studio. Все права защищены.</p>
+        <p>В© 2026 НАСТОЯЩЕ. Все права защищены.</p>
     </footer>
 
     <script>
